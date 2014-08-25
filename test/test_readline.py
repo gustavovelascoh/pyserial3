@@ -72,7 +72,7 @@ class Test_Readline(unittest.TestCase):
         if hasattr(self.s, 'xreadlines'):
             self.s.write(serial.to_bytes([0x31, 0x0a, 0x32, 0x0a, 0x33, 0x0a]))
             self.failUnlessEqual(
-                    list(self.s.xreadlines()),
+                    list(self.s),
                     [serial.to_bytes([0x31, 0x0a]), serial.to_bytes([0x32, 0x0a]), serial.to_bytes([0x33, 0x0a])]
                     )
 
