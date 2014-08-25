@@ -488,7 +488,12 @@ class PosixSerial(SerialBase):
     def write(self, data):
         """Output the given string over the serial port."""
         if not self._isOpen: raise portNotOpenError
-        d = to_bytes(data)
+        
+        if sys.version_info < (3,0):
+            d = to_bytes(data)
+        else:
+            d = bytes(data,'ISO-8859-1')
+
         tx_len = len(d)
         if self._writeTimeout is not None and self._writeTimeout > 0:
             timeout = time.time() + self._writeTimeout
